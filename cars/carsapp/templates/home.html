@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+{% load static%}
+
+<form method="post" action="{% url 'add_car' %}">
+  {% csrf_token %}
+  {% include 'forms/carform.html' %}
+ 
+<button type="submit" >ADD</button>
+</form>
+
+<br><br><br><br>
+
+
+<h2>Car List</h2>
+
+<form method="post" action="{% url 'home' %}">
+  {% csrf_token %}
+  {% include 'forms/filterform.html' %}
+ 
+<button type="submit" >FILTER</button>
+</form>
+
+<form  action="{% url 'home' %}">
+  {% csrf_token %}
+
+ 
+<button type="submit" >SHOW ALL</button>
+</form>
+
+{% for car in cars %}
+
+	{% if car.color == "2" %}
+	<img src="{% static 'img/blue_car.png' %}">
+	{% elif car.color == "1" %}
+	<img src="{% static 'img/red_car.png' %}">
+	{% endif %}
+	Car {{car.name}}
+
+{% endfor %}
+
+  
+</body>
+</html>
